@@ -30,3 +30,12 @@ function ReSort(table_)
     end
     return k
 end
+
+function FindPlr(arg)
+    for i,v in pairs(game:service"Players":GetChildren()) do
+        if v.Name:lower():find(arg:lower()) or v.DisplayName:lower():find(arg:lower())
+            return v
+        end
+    end
+    return false
+end
