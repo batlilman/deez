@@ -44,6 +44,7 @@ return function(...)
     cur = 0
     goal = tonumber(converted)
 
+    saymsg("Started...")
     game:service"RunService":BindToRenderStep("CDROP_FUNCTION",1,function()
         game:service"ReplicatedStorage".MainEvent:FireServer("DropMoney",10000)
     end)
