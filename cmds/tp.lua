@@ -1,4 +1,5 @@
 return function(...)
+    local data = ProccessArgs(...)
     local player = game:service"Players".LocalPlayer
     local CurFist
     pcall(function()
@@ -25,41 +26,32 @@ return function(...)
             end
         end
     end
-
-    local data = ProccessArgs(...)
-    local OnlyID = ReSort(Alts)[1]
-    if player.UserId == OnlyID then
-        local target = FindPlr(data[2])
-        if data[2]:lower() == "host" then
-            target = game:service"Players":GetPlayerByUserId(Settings['host'])
-        end
-        if target == false then
-            saymsg("User not found.")
-        else
-            print(OnlyID, target.Name, data[3])
-            local intial = game:service"Players":GetPlayerByUserId(Settings['host']).Character.HumanoidRootPart.Position
-            local x,y,z=tostring(intial.X),tostring(intial.Y),tostring(intial.Z)
-            local Loc2 = x..","..y..","..z
-            local TPLocations = {
-                ['train']="595,47,-115",['club']="-266,0,-331",['admin']="-872,-33,-651",
-                ['jail']="-332,21,-87",['school']="-599,21,174",['basketball']="-897,21,-538",['bank']="-375,21,-367",
-                ['host']=Loc2
-            }
-            local LocationData = TPLocations[data[3]:lower()] or false
-            if LocationData then
-                local wasanchored = player.Character.HumanoidRootPart.Anchored
-                local org = player.Character.HumanoidRootPart.CFrame
-                player.Character.HumanoidRootPart.Anchored = false
-                repeat
-                    local combat = player.Character:FindFirstChild("Combat") or player.Backpack:FindFirstChild("Combat")
-                    if player.Backpack:FindFirstChild("Combat") then
-                        player.Backpack:FindFirstChild("Combat").Parent = player.Character
-                    end
-                    reach(true)
-                    player.Character.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame*CFrame.new(0,5,0)
-                    player.Character:FindFirstChild("Combat"):Activate()
-                    wait(0.001)
-                until target.Character.BodyEffects:FindFirstChild("K.O").Value == true
+    local lib = {
+        Admin = "-871,-33,-662",
+        Bank = "-377,21,-361",
+        Club = "-266,0,-428",
+        Train = "600,47,-117",
+    }
+    local target = FindPlr(data[2])
+    if data[2]:lower() == 'host' then
+        target = game:service"Players":GetPlayerByUserId(Settings['host']).Name
+    end
+    if target ~= false then
+        target = game:service"Players"[target]
+        if target and player and target.Character and player.Character then
+            local OldPos = player.Character.HumanoidRootPart.CFrame
+            player.Character.HumanoidRootPart.Anchored = false
+            repeat
+                local combat = player.Character:FindFirstChild("Combat") or player.Backpack:FindFirstChild("Combat")
+                if player.Backpack:FindFirstChild("Combat") then
+                    player.Backpack:FindFirstChild("Combat").Parent = player.Character
+                end
+                reach(true)
+                player.Character.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame*CFrame.new(0,5,0)
+                player.Character:FindFirstChild("Combat"):Activate()
+                wait(0.001)
+            until target.Character.BodyEffects:FindFirstChild("K.O").Value == true      
+            if target.Character.BodyEffects:FindFirstChild("K.O").Value == true then
                 reach(false)
                 repeat
                     if target.Character:FindFirstChild("GRABBING_CONSTRAINT") then
@@ -72,17 +64,23 @@ return function(...)
                     end
                     wait(1)
                 until target.Character:FindFirstChild("GRABBING_CONSTRAINT")
-                local x,y,z = LocationData:split(",")[1],LocationData:split(",")[2],LocationData:split(",")[3]
+                local x,y,z = nil,nil,nil
+                x,y,z=lib[data[3]:lower()]:split(",")[1],lib[data[3]:lower()]:split(",")[2],lib[data[3]:lower()]:split(",")[3]
+                if data[3]:lower() == 'host' then
+                    local a = game:service"Players":GetPlayerByUserId(Settings['host'])
+                    x,y,z = a.Character.HumanoidRootPart.CFrame.X,a.Character.HumanoidRootPart.CFrame.Y,a.Character.HumanoidRootPart.CFrame.Z
+                else
+                    local a = game:service"Players":GetPlayerByUserId(Settings['host'])
+                    x,y,z = a.Character.HumanoidRootPart.CFrame.X,a.Character.HumanoidRootPart.CFrame.Y,a.Character.HumanoidRootPart.CFrame.Z
+                end
                 player.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,z)
                 wait(1)
                 game:service"ReplicatedStorage".MainEvent:FireServer("Grabbing",false)
                 wait(1)
-                player.Character.HumanoidRootPart.CFrame = org
-                wait(1)
-                player.Character.HumanoidRootPart.Anchored = wasanchored
-            else
-                saymsg("Location doesn't exist!")
+                player.Character.HumanoidRootPart.CFrame = OldPos
             end
         end
+    else
+        saymsg("Error, player not found.")
     end
 end
