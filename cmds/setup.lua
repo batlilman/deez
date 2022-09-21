@@ -10,12 +10,84 @@ local Lib = {
         MaxIterations = 13,
         MaxPerRow = 3,
         CurrentPerRow = 3
+    },
+    admin = {
+        MultiplierX = -18,
+        MultiplierZ = 15,
+        StartX = -826,
+        CurrentX = -826,
+        StartY = -40,
+        StartZ = -622,
+        CurrentZ = -622,
+        MaxIterations = 7,
+        MaxPerRow = 6,
+        CurrentPerRow = 6
+    },
+    train = {
+        MultiplierX = -14,
+        MultiplierZ = -10,
+        StartX = 674,
+        CurrentX = 674,
+        StartY = 47,
+        StartZ = -46,
+        CurrentZ = -46,
+        MaxIterations = 7,
+        MaxPerRow = 6,
+        CurrentPerRow = 6
+    },
+    jail = {
+        MultiplierX = 14,
+        MultiplierZ = 4,
+        StartX = -341,
+        CurrentX = -341,
+        StartY = 22,
+        StartZ = -46,
+        CurrentZ = -46,
+        MaxIterations = 7,
+        MaxPerRow = 6,
+        CurrentPerRow = 6
+    },
+    school = {
+        MultiplierX = -25,
+        MultiplierZ = -11,
+        StartX = -489,
+        CurrentX = -489,
+        StartY = 21,
+        StartZ = 233,
+        CurrentZ = 233,
+        MaxIterations = 5,
+        MaxPerRow = 8,
+        CurrentPerRow = 8
+    },
+    basketball = {
+        MultiplierX = -17.8,
+        MultiplierZ = 18.6,
+        StartX = -870,
+        CurrentX = -870,
+        StartY = 21,
+        StartZ = -520,
+        CurrentZ = -520,
+        MaxIterations = 5,
+        MaxPerRow = 8,
+        CurrentPerRow = 8
+    },
+    club = {
+        MultiplierX = 8.2,
+        MultiplierZ = -13.6,
+        StartX = -289,
+        CurrentX = -289,
+        StartY = -7,
+        StartZ = -350,
+        CurrentZ = -350,
+        MaxIterations = 6,
+        MaxPerRow = 7,
+        CurrentPerRow = 7
     }
-}
+} -- calculating locations is actually faster than copying cords manually lol
 
 return function(...)
     local data = ProccessArgs(...)
-    local areas = {'bank'}
+    local areas = {'train','club','admin','jail','school','basketball','bank'}
     local plr = game:service"Players".LocalPlayer
 
     local function ReSort(table_)
