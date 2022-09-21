@@ -7,3 +7,7 @@ function ProccessArgs(...)
     end
     return k
 end
+
+function say(msg)
+    game:service"ReplicatedStorage".DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, 'All')
+end
