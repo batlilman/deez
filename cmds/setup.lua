@@ -90,25 +90,6 @@ return function(...)
     local areas = {'train','club','admin','jail','school','basketball','bank'}
     local plr = game:service"Players".LocalPlayer
 
-    local function ReSort(table_)
-        local function CheckPlayer(userid)
-            for i,v in pairs(game:service"Players":GetChildren()) do
-                if v.UserId == userid then
-                    return true
-                end
-            end
-            return false
-        end
-
-        local k = {}
-        for i,v in pairs(table_) do
-            if CheckPlayer(v) == true then
-                table.insert(k,v)
-            end
-        end
-        return k
-    end
-
     if table.find(areas,data[2]) then
         local area = data[2]:lower()
         for i=1,Lib[area]['MaxIterations']*Lib[area]['MaxPerRow'] do
