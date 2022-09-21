@@ -10,7 +10,7 @@ return function(...)
             plr.Character.HumanoidRootPart.Anchored = false
             repeat
                 plr.Character.HumanoidRootPart.CFrame = ws.Ignored.Shop:FindFirstChild(maskShop).Head.CFrame+Vector3.new(0,2,0)
-                fireclickdetector(ws.Ignored.Shop:FindFirstChild(maskShop))
+                fireclickdetector(ws.Ignored.Shop:FindFirstChild(maskShop).ClickDetector)
                 wait(0.001)
             until plr.Backpack:FindFirstChild(maskItem) or plr.Character:FindFirstChild(maskItem) or plr.Character.DataFolder.Currency.Value <= plr.Character.DataFolder.Currency.Value - maskPrice
             wait()
