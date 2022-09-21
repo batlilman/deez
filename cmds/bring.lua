@@ -1,5 +1,7 @@
-return function(...)
-    local data = ProccessArgs({...})
+return function()
     local players = game:service"Players"
-    players.LocalPlayer.Character.HumanoidRootPart.CFrame=players[data[1]].Character.HumanoidRootPart.CFrame+Vector3.new(0,10,0)
+    local plr = players:GetPlayerByUserId(Settings['host'])
+    if plr then
+        players.LocalPlayer.Character.HumanoidRootPart.CFrame=plr.Character.HumanoidRootPart.CFrame+Vector3.new(0,10,0)
+    end
 end
