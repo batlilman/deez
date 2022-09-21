@@ -18,6 +18,7 @@ return function(...)
     local areas = {'bank'}
     local plr = game:service"Players".LocalPlayer
     if table.find(args,data[2]) then
+        local area = data[2]:lower()
         for i=1,Lib[area]['MaxIterations']*Lib[area]['MaxPerRow'] do
             local x,y,z = Lib[area]['CurrentX'],Lib[area]['StartY'],Lib[area]['CurrentZ']
             if Alts[i] == plr.UserId then
