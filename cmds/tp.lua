@@ -36,12 +36,14 @@ return function(...)
         if target == false then
             saymsg("User not found.")
         else
+            print(OnlyID, target.Name, data[3])
             local intial = game:service"Players":GetPlayerByUserId(Settings['host']).Character.HumanoidRootPart.Position
             local x,y,z=tostring(intial.X),tostring(intial.Y),tostring(intial.Z)
+            local Loc2 = x..","..y..","..z
             local TPLocations = {
                 ['train']="595,47,-115",['club']="-266,0,-331",['admin']="-872,-33,-651",
                 ['jail']="-332,21,-87",['school']="-599,21,174",['basketball']="-897,21,-538",['bank']="-375,21,-367",
-                ['host']=x..","..y..","..z
+                ['host']=Loc2
             }
             local LocationData = TPLocations[data[3]:lower()] or false
             if LocationData then
