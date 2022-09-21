@@ -27,10 +27,10 @@ return function(...)
         end
     end
     local lib = {
-        Admin = "-871,-33,-662",
-        Bank = "-377,21,-361",
-        Club = "-266,0,-428",
-        Train = "600,47,-117",
+        admin = "-871,-33,-662",
+        bank = "-377,21,-361",
+        club = "-266,0,-428",
+        train = "600,47,-117",
     }
     local target = FindPlr(data[2])
     if data[2]:lower() == 'host' then
