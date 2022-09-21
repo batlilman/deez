@@ -18,27 +18,13 @@ return function(...)
     local areas = {'bank'}
     local plr = game:service"Players".LocalPlayer
 
-    local function InIndex(table_, value, max_)
-        local k = {}
-        for i,v in pairs(table_) do
-            if tostring(value) == v then
-                return true
-            end
-            if i == max_ then
-                break
-            end
-            k[i] = v
-        end
-        return false
-    end
-
-    if table.find(args,data[2]) then
+    if table.find(areas,data[2]) then
         local area = data[2]:lower()
         for i=1,Lib[area]['MaxIterations']*Lib[area]['MaxPerRow'] do
             local x,y,z = Lib[area]['CurrentX'],Lib[area]['StartY'],Lib[area]['CurrentZ']
             if Alts[i] == plr.UserId then
                 plr.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,z)
-                return
+                break
             end
             Lib[area]['CurrentX'] = Lib[area]['CurrentX'] + Lib[area]['MultiplierX']
             if i == Lib[area]['CurrentPerRow'] then
