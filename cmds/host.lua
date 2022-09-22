@@ -6,7 +6,7 @@ return function(...)
         pcall(function() game:service"RunService":UnbindFromRenderStep("NOCLIPPER") end)
         game:service"RunService":BindToRenderStep("NOCLIPPER",10,function()
             for i,v in pairs(game:service"Players":GetChildren()) do
-                if (player.Character.HumanoidRootPart.Position-v.Character.HumanoidRootPart.Position).Magnitude <= 15 and v.Name ~= player.Name then
+                if (player.Character.HumanoidRootPart.Position-v.Character.HumanoidRootPart.Position).Magnitude <= 15 and v.Name ~= player.Name and table.find(ReSort(Alts),v.UserId) then
                     for _, c in pairs(v.Character:GetChildren()) do
                         if c:IsA("MeshPart") or c.Name == "HumanoidRootPart" then
                             c:Destroy()
