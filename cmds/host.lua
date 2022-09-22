@@ -2,21 +2,31 @@ return function(...)
     local data = ProccessArgs(...)
     local player = game:service"Players".LocalPlayer
     
-    if data[2]:lower() == "spot" then
-        pcall(function() game:service"RunService":UnbindFromRenderStep("NOCLIPPER") end)
-        game:service"RunService":BindToRenderStep("NOCLIPPER",10,function()
-            for i,v in pairs(game:service"Players":GetChildren()) do
-                if (player.Character.HumanoidRootPart.Position-v.Character.HumanoidRootPart.Position).Magnitude <= 15 and v.Name ~= player.Name and table.find(ReSort(Alts),v.UserId) then
-                    for _, c in pairs(v.Character:GetChildren()) do
-                        if c:IsA("MeshPart") or c.Name == "HumanoidRootPart" then
-                            c:Destroy()
-                        end
-                    end
-                end
+    if data[2]:lower() == "line" then
+        local g = 4
+        local function ReverseRotation(x)
+            return x-(x*2)
+        end
+        local function CreateSet()
+            local k = {}
+            local g = 4
+            for i=1,20 do
+                local c = ReverseRotation(g)
+                local f = ReverseRotation(c)
+                g = g + 4
+                table.insert(k,f)
+                table.insert(k,c)
             end
-        end)
-        wait(0.2)
-        local plr = game:service"Players":GetPlayerByUserId(Settings['host'])
-        player.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame*CFrame.new(0,0,-5)
+            return k
+        end
+        local Alts_ = ReSort(Alts)
+        local BaseAnchor = game:service"Players":GetPlayerByUserId(Settings['host'])
+        local Set = CreateSet()
+        for i=1,40 do
+            if Alts_[i] == player.UserId then
+                player.Character.HumanoidRootPart.CFrame = BaseAnchor.Character.HumanoidRootPart.CFrame * CFrame.new(Set[i],0,0)
+                break
+            end
+        end
     end
 end
