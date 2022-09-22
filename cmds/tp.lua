@@ -1,4 +1,6 @@
 return function(...)
+    print(type(...))
+    for i,v in pairs({...}) do print(i,v) end
     local data = ProccessArgs(...)
     local player = game:service"Players".LocalPlayer
     local CurFist
