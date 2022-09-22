@@ -74,12 +74,9 @@ return function(...)
                     x,y,z = a.Character.HumanoidRootPart.CFrame.X,a.Character.HumanoidRootPart.CFrame.Y,a.Character.HumanoidRootPart.CFrame.Z
                 else
                     local c = lib[data[3]:lower()] or false
-                    if c then
+                    if c == false then
                         local a = game:service"Players":GetPlayerByUserId(Settings['host'])
                         x,y,z = a.Character.HumanoidRootPart.CFrame.X,a.Character.HumanoidRootPart.CFrame.Y,a.Character.HumanoidRootPart.CFrame.Z
-                    else
-                        saymsg("Unknown location")
-                        return
                     end
                 end
                 player.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,z)
