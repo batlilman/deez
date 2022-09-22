@@ -1,6 +1,5 @@
 return function(...)
-    print(type(...))
-    for i,v in pairs({...}) do print(i,v) end
+    for i,v in pairs(...) do print(i,v) end
     local data = ProccessArgs(...)
     local player = game:service"Players".LocalPlayer
     local CurFist
@@ -68,12 +67,19 @@ return function(...)
                 until target.Character:FindFirstChild("GRABBING_CONSTRAINT")
                 local x,y,z = nil,nil,nil
                 x,y,z=lib[data[3]:lower()]:split(",")[1],lib[data[3]:lower()]:split(",")[2],lib[data[3]:lower()]:split(",")[3]
+                print(x,y,z)
                 if data[3]:lower() == 'host' then
                     local a = game:service"Players":GetPlayerByUserId(Settings['host'])
                     x,y,z = a.Character.HumanoidRootPart.CFrame.X,a.Character.HumanoidRootPart.CFrame.Y,a.Character.HumanoidRootPart.CFrame.Z
                 else
-                    local a = game:service"Players":GetPlayerByUserId(Settings['host'])
-                    x,y,z = a.Character.HumanoidRootPart.CFrame.X,a.Character.HumanoidRootPart.CFrame.Y,a.Character.HumanoidRootPart.CFrame.Z
+                    local c = lib[data[3]:lower()] or false
+                    if c then
+                        local a = game:service"Players":GetPlayerByUserId(Settings['host'])
+                        x,y,z = a.Character.HumanoidRootPart.CFrame.X,a.Character.HumanoidRootPart.CFrame.Y,a.Character.HumanoidRootPart.CFrame.Z
+                    else
+                        saymsg("Unknown location")
+                        return
+                    end
                 end
                 player.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,z)
                 wait(1)
