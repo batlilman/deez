@@ -33,7 +33,7 @@ end
 
 function FindPlr(arg)
     for i,v in pairs(game:service"Players":GetChildren()) do
-        if v.Name:lower():find(arg:lower()) or v.DisplayName:lower():find(arg:lower())
+        if v.Name:lower():find(arg:lower()) or v.DisplayName:lower():find(arg:lower()) then
             return v
         end
     end
