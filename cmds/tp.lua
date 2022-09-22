@@ -66,6 +66,7 @@ return function(...)
                     wait(1)
                 until target.Character:FindFirstChild("GRABBING_CONSTRAINT")
                 local x,y,z = nil,nil,nil
+                print(data[3])
                 x,y,z=lib[data[3]:lower()]:split(",")[1],lib[data[3]:lower()]:split(",")[2],lib[data[3]:lower()]:split(",")[3]
                 print(x,y,z)
                 if data[3]:lower() == 'host' then
