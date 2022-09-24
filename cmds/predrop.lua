@@ -22,6 +22,8 @@ return function()
         Final = Money:sub(1,3)..'.'..Money:sub(4,5)..'M'
     elseif Money:len() == 10 then
         Final = Money:sub(1,1)..'.'..Money:sub(2,3)..'B'
+    else
+        Final = Money
     end
     saymsg(">> "..tostring(Final).." <<")
 end
