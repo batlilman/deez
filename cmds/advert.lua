@@ -13,7 +13,7 @@ return function(...)
             end
         end
         Settings['admsg'] = NewMsg
-    elseif data[2]]:lower() == "on" then
+    elseif data[2]:lower() == "on" then
         Adverting = true
         while Adverting == true do
             wait(1)
