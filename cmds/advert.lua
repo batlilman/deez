@@ -4,7 +4,7 @@ return function(...)
     local data = ProccessArgs(...)
     if data[2]:lower() == "set" then
         local NewMsg = ""
-        for i=3,#data then
+        for i=3,#data do
             if i == #data then
                 NewMsg = NewMsg..""..tostring(data[i])
             else
