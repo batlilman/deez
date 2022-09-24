@@ -2,7 +2,8 @@ local Adverting = false
 
 return function(...)
     local data = ProccessArgs(...)
-    if data[2]:lower() == "set" then
+    print(data[1])
+    if data[1]:lower() == "set" then
         local NewMsg = ""
         for i=3,#data do
             if i == #data then
@@ -12,13 +13,13 @@ return function(...)
             end
         end
         Settings['admsg'] = NewMsg
-    elseif data[2]:lower() == "on" then
+    elseif data[1]:lower() == "on" then
         Adverting = true
         while Adverting == true do
             wait(1)
             saymsg(Settings['admsg'])
         end
-    elseif data[2]:lower() == "off" then
+    elseif data[1]:lower() == "off" then
         Adverting = false
     end
 end
